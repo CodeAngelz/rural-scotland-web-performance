@@ -1,14 +1,9 @@
 {
   "name": "skye-and-glen-demo",
   "version": "1.0.0",
-  "description": "Demonstration website for MSc web performance research on rural Scotland broadband.",
-  "author": "Michael Emeka Ibeh (B01767356, UWS)",
+  "description": "Demonstration website for MSc web performance research. UWS B01767356.",
   "private": true,
-  "homepage": "https://github.com/[your-username]/rural-scotland-web-performance",
-  "repository": {
-    "type": "git",
-    "url": "https://github.com/[your-username]/rural-scotland-web-performance.git"
-  },
+  "homepage": ".",
   "dependencies": {
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
