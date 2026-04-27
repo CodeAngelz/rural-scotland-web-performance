@@ -1,15 +1,33 @@
 # Web Performance Analysis for Rural Scotland
-Comparing Edge Computing and CDN Solutions Using Open-Source Network Data
+## Comparing Edge Computing and CDN Solutions Using Open-Source Network Data
 
-**Author:** Michael Emeka Ibeh | **Banner ID:** B01767356 | **Institution:** University of the West of Scotland | **Programme:** MSc Information Technology with Web Development | **Supervisor:** Nuzhat Younis
+**Student:** Michael Emeka Ibeh
+**Banner ID:** B01767356
+**Programme:** MSc Information Technology with Web Development
+**University:** University of the West of Scotland
+**Supervisor:** Nuzhat Younis
+**Submission Year:** 2026
 
 ---
 
-## Research Question
+## About this project
 
-Rural Scotland has significantly slower internet than urban areas — the Western Isles averages 15–20 Mbps while Glasgow averages 67 Mbps. When internet connection itself is slow, does edge computing actually perform better than a standard CDN?
+People living in rural Scotland deal with internet speeds far below the national
+average. The Western Isles averages 15 to 20 Mbps while cities like Glasgow
+average around 67 Mbps.
 
-## Key Findings
+This project asks one question: when the internet connection itself is slow,
+does edge computing actually perform better than a standard CDN?
+
+To answer it, I analysed 81,000 real performance records from the HTTP Archive
+dataset, filtering for connections below 20 Mbps to match rural Scottish
+conditions. I also built and deployed a simple demonstration website using both
+Cloudflare Workers (edge computing) and Cloudflare Pages (CDN) to understand
+each technology from a developer's point of view.
+
+---
+
+## Key findings
 
 | Metric              | Edge computing | CDN    | Difference          |
 |---------------------|----------------|--------|---------------------|
@@ -18,86 +36,67 @@ Rural Scotland has significantly slower internet than urban areas — the Wester
 | Time to First Byte  | 312ms          | 489ms  | Edge 36% faster     |
 | Std deviation       | 2.17s          | 2.43s  | Edge more consistent|
 
-**Conclusion:** Edge computing provides modest but consistent improvements on slow connections, with the largest benefits for websites with server-side logic and connections in the 15–20 Mbps range. For connections below 10 Mbps, reducing page weight matters more than switching infrastructure.
+**Main conclusion:** Edge computing provides a consistent but modest improvement
+on slow connections. The benefit is largest for websites with server-side logic
+and for connections in the 15 to 20 Mbps range. For connections below 10 Mbps,
+reducing page weight matters more than switching infrastructure.
 
 ---
 
-## Structure
+## Repository structure
 
 ```
 rural-scotland-web-performance/
-├── README.md                    This file
-├── .gitignore                   Git configuration
 │
-├── data/
-│   └── DATASETS.md              Where to download datasets
+├── README.md                        This file
+├── .gitignore                       Files Git should not upload
 │
-├── notebooks/                   Python analysis scripts
-│   ├── SETUP.md                 Installation instructions
-│   ├── 01_data_cleaning.py      Clean raw dataset
-│   ├── 02_filtering.py          Filter for rural conditions
-│   └── 03_analysis_charts.py    Generate analysis and charts
+├── notebooks/                       Python analysis scripts
+│   ├── SETUP.md                     How to install and run Python scripts
+│   ├── 01_data_cleaning.py          Step 1 — clean the raw dataset
+│   ├── 02_filtering.py              Step 2 — filter for rural conditions
+│   └── 03_analysis_charts.py        Step 3 — statistics and charts
 │
-├── demo-site/                   React demonstration website
-│   ├── DEPLOY_CDN.md            Deploy via Cloudflare Pages (CDN)
-│   ├── package.json
-│   ├── public/index.html
+├── demo-site/                       React demonstration website
+│   ├── DEPLOY_CDN.md                How to deploy via Cloudflare Pages
+│   ├── package.json                 Project dependencies
+│   ├── public/
+│   │   └── index.html               HTML entry point
 │   └── src/
-│       ├── App.jsx              Main page component
-│       ├── index.jsx            React entry point
-│       └── styles.css           Styling
+│       ├── index.jsx                React entry point
+│       ├── App.jsx                  Main page — edit content here
+│       └── styles.css               All visual styling
 │
-└── workers/                     Cloudflare Workers edge script
-    ├── DEPLOY_WORKERS.md        Deploy via Cloudflare Workers
-    ├── worker.js                Edge computing handler
-    └── wrangler.toml            Deployment configuration
+├── workers/                         Cloudflare Workers edge script
+│   ├── DEPLOY_WORKERS.md            How to deploy via Cloudflare Workers
+│   ├── worker.js                    Edge computing handler
+│   └── wrangler.toml                Deployment configuration
+│
+└── data/
+    └── DATASETS.md                  Where to download the dataset
 ```
 
 ---
 
-## Quick Start
+## How to run the Python analysis
 
-### Run Python Analysis
+### Requirements
+- Anaconda — download from https://www.anaconda.com/download
+  (This installs Python, Pandas, Matplotlib, NumPy and Jupyter all at once)
 
-1. **Install dependencies:** Download Anaconda from [anaconda.com](https://www.anaconda.com/download) (includes Python, Pandas, Matplotlib, NumPy)
-2. **Download dataset:** See [data/DATASETS.md](data/DATASETS.md)
-3. **Run scripts:**
-   ```bash
-   python notebooks/01_data_cleaning.py
-   python notebooks/02_filtering.py
-   python notebooks/03_analysis_charts.py
-   ```
-4. **Output:** Charts are saved to `data/charts/`
+### Steps
+1. Download the dataset — see data/DATASETS.md for the link
+2. Save it as `http_archive_raw.csv` inside the `data/` folder
+3. Open Anaconda Navigator and launch Jupyter Notebook
+4. Navigate to the `notebooks/` folder and run scripts in order:
 
-### Deploy Demo Website (CDN)
+```bash
+python notebooks/01_data_cleaning.py
+python notebooks/02_filtering.py
+python notebooks/03_analysis_charts.py
+```
 
-1. `cd demo-site && npm install && npm run build`
-2. Go to [dash.cloudflare.com](https://dash.cloudflare.com)
-3. Drag the `build/` folder to Cloudflare Pages
-4. Your site is live at `https://[project-name].pages.dev`
-
-### Deploy Demo Website (Edge Computing)
-
-1. Install Node.js and Wrangler: `npm install -g wrangler`
-2. `wrangler login`
-3. `cd demo-site && npm run build && cd ../workers`
-4. Update `wrangler.toml` with your KV namespace ID
-5. `wrangler deploy`
-
----
-
-## Methodology
-
-- **Dataset:** 81,000 real performance records from HTTP Archive (connections < 20 Mbps)
-- **Rural threshold:** < 20 Mbps based on Ofcom Connected Nations Report 2023
-- **Providers tested:** Cloudflare Workers (edge), AWS Lambda@Edge, Fastly Compute vs Cloudflare CDN, AWS CloudFront, Akamai
-- **Metrics:** Load time, Time to First Byte (TTFB), consistency
-
----
-
-## License
-
-This project is provided for educational and research purposes.
+Charts are saved automatically to `data/charts/`
 
 ---
 
@@ -120,8 +119,8 @@ Then open http://localhost:3000 in your browser.
 
 ## Live deployments
 
-- **CDN version (Cloudflare Pages):** https://skyeandglen.pages.dev
-- **Edge computing version (Cloudflare Workers):** https://skyeandglen.workers.dev
+- **CDN version (Cloudflare Pages):** https://skyeandglen-uws.pages.dev
+- **Edge computing version (Cloudflare Workers):** https://skyeandglen.skyeandglen-uws.workers.dev
 
 These are demonstration sites only. They collect no user data and take no
 real bookings.
