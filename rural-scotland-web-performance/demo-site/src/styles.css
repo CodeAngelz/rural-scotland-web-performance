@@ -1,0 +1,543 @@
+/* Skye & Glen demonstration website styling
+   
+   Sections:
+   1. Google Fonts  2. CSS variables  3. Reset  4. Site wrapper
+   5. Navigation    6. Hero section  7. General sections  8. Experiences grid
+   9. Quote        10. Contact       11. Footer  12. Responsive
+*/
+
+@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;1,400&family=Source+Serif+4:wght@300;400&display=swap');
+
+/* CSS Variables — edit these to change colours across the site */
+:root {
+  --pine:       #1c3a2a;   /* main dark green */
+  --pine-dark:  #0f2218;   /* darker green used in footer */
+  --pine-light: #2a5240;   /* lighter green for hover states */
+  --gold:       #c9973a;   /* gold / amber accent colour */
+  --heather:    #7b5ea7;   /* purple — first card accent */
+  --cream:      #f7f4ef;   /* off-white page background */
+  --stone:      #8a7f74;   /* grey-brown for secondary text */
+  --text-dark:  #1a1a18;   /* almost black for main text */
+  --text-mid:   #4a4840;   /* mid-grey for body paragraphs */
+}
+*::before,
+*::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: 'Source Serif 4', Georgia, serif;
+  background: var(--cream);
+  color: var(--text-dark);
+  overflow-x: hidden;
+}
+
+a {
+  text-decoration: none;
+}
+
+
+/* ── 4. Site wrapper ──────────────────────────────────────── */
+
+.site {
+  max-width: 900px;
+  margin: 0 auto;
+}
+
+
+/* ── 5. Navigation bar ────────────────────────────────────── */
+
+.navbar {
+  background: var(--pine);
+  padding: 14px 28px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.logo {
+  font-family: 'Playfair Display', serif;
+  color: #ffffff;
+  font-size: 18px;
+  letter-spacing: 0.03em;
+}
+
+.logo-and {
+  color: var(--gold);
+}
+
+.nav-links {
+  list-style: none;
+  display: flex;
+  gap: 24px;
+}
+
+.nav-links a {
+  color: rgba(255, 255, 255, 0.7);
+  font-size: 12px;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  font-family: 'Source Serif 4', serif;
+  transition: color 0.2s;
+}
+
+.nav-links a:hover {
+  color: #ffffff;
+}
+
+
+/* ── 6. Hero section ──────────────────────────────────────── */
+
+.hero {
+  position: relative;
+  background: var(--pine);
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+}
+
+/* Gradient overlay behind the hero text */
+.hero-bg {
+  position: absolute;
+  inset: 0;
+  background:
+    radial-gradient(ellipse 80% 60% at 70% 30%, #3a6b50 0%, transparent 60%),
+    linear-gradient(160deg, #0f2218 0%, #1c3a2a 40%, #2a5240 100%);
+}
+
+/* Mountain silhouette made with CSS shapes */
+.hills {
+  position: relative;
+  height: 130px;
+  width: 100%;
+}
+
+.hill {
+  position: absolute;
+  bottom: 0;
+  border-radius: 50% 60% 0 0;
+}
+
+.hill-1 {
+  left: -5%;
+  width: 50%;
+  height: 110px;
+  background: var(--pine-dark);
+}
+
+.hill-2 {
+  left: 28%;
+  width: 45%;
+  height: 90px;
+  background: #162e22;
+}
+
+.hill-3 {
+  right: -5%;
+  width: 42%;
+  height: 105px;
+  background: var(--pine);
+}
+
+/* Badge in the top-right corner of the hero */
+.tech-badge {
+  position: absolute;
+  top: 16px;
+  right: 20px;
+  z-index: 3;
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  padding: 5px 12px;
+  background: rgba(255, 255, 255, 0.08);
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  border-radius: 3px;
+  font-size: 11px;
+  color: rgba(255, 255, 255, 0.75);
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  font-family: 'Source Serif 4', serif;
+}
+
+/* Pulsing green dot inside the badge */
+.badge-dot {
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: #4caf7d;
+  flex-shrink: 0;
+  animation: pulse 2s infinite;
+}
+
+@keyframes pulse {
+  0%, 100% { opacity: 1; }
+  50%       { opacity: 0.3; }
+}
+
+/* Text content inside the hero */
+.hero-text {
+  position: relative;
+  z-index: 2;
+  padding: 40px 32px 24px;
+}
+
+.hero-tag {
+  font-size: 11px;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--gold);
+  margin-bottom: 12px;
+  font-family: 'Source Serif 4', serif;
+}
+
+.hero-title {
+  font-family: 'Playfair Display', serif;
+  color: #ffffff;
+  font-size: 40px;
+  line-height: 1.15;
+  margin-bottom: 14px;
+}
+
+.hero-title em {
+  color: var(--gold);
+  font-style: italic;
+}
+
+.hero-sub {
+  color: rgba(255, 255, 255, 0.65);
+  font-size: 15px;
+  line-height: 1.75;
+  max-width: 440px;
+  font-weight: 300;
+}
+
+.hero-buttons {
+  margin-top: 22px;
+  display: flex;
+  gap: 12px;
+  flex-wrap: wrap;
+}
+
+.btn-primary {
+  background: var(--gold);
+  color: #ffffff;
+  border: none;
+  padding: 11px 26px;
+  font-size: 13px;
+  letter-spacing: 0.05em;
+  cursor: pointer;
+  font-family: 'Playfair Display', serif;
+  font-weight: 600;
+  transition: opacity 0.2s;
+}
+
+.btn-primary:hover {
+  opacity: 0.88;
+}
+
+.btn-outline {
+  background: transparent;
+  color: #ffffff;
+  border: 1px solid rgba(255, 255, 255, 0.4);
+  padding: 11px 26px;
+  font-size: 13px;
+  letter-spacing: 0.05em;
+  cursor: pointer;
+  font-family: 'Source Serif 4', serif;
+  transition: border-color 0.2s;
+}
+
+.btn-outline:hover {
+  border-color: rgba(255, 255, 255, 0.8);
+}
+
+/* Performance metrics strip at the bottom of the hero */
+.perf-bar {
+  position: relative;
+  z-index: 2;
+  background: rgba(0, 0, 0, 0.28);
+  padding: 10px 32px;
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  flex-wrap: wrap;
+  font-size: 12px;
+  color: rgba(255, 255, 255, 0.6);
+  letter-spacing: 0.05em;
+  font-family: 'Source Serif 4', serif;
+}
+
+.perf-item strong {
+  color: #4caf7d;
+  font-weight: 600;
+}
+
+.perf-sep {
+  color: rgba(255, 255, 255, 0.2);
+}
+
+
+/* ── 7. General section styles ────────────────────────────── */
+
+.section {
+  padding: 42px 32px;
+}
+
+.section-label {
+  font-size: 10px;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--stone);
+  margin-bottom: 8px;
+  font-family: 'Source Serif 4', serif;
+}
+
+.section-title {
+  font-family: 'Playfair Display', serif;
+  font-size: 28px;
+  color: var(--pine);
+  margin-bottom: 18px;
+  line-height: 1.2;
+}
+
+.body-text {
+  font-size: 15px;
+  line-height: 1.8;
+  color: var(--text-mid);
+  font-weight: 300;
+  margin-bottom: 26px;
+}
+
+
+/* ── 8. Experiences grid ──────────────────────────────────── */
+
+.exp-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 16px;
+}
+
+.exp-card {
+  background: #ffffff;
+  border: 1px solid #ddd6cc;
+  padding: 22px;
+  /* border-left colour is set inline in App.jsx per card */
+}
+
+.exp-icon {
+  font-size: 24px;
+  margin-bottom: 12px;
+}
+
+.exp-title {
+  font-family: 'Playfair Display', serif;
+  font-size: 16px;
+  color: var(--pine);
+  margin-bottom: 8px;
+  font-weight: 600;
+}
+
+.exp-desc {
+  font-size: 13px;
+  color: var(--stone);
+  line-height: 1.65;
+  font-weight: 300;
+}
+
+.exp-price {
+  margin-top: 16px;
+  font-size: 12px;
+  color: var(--gold);
+  font-weight: 600;
+  letter-spacing: 0.05em;
+}
+
+
+/* ── 9. Quote section ─────────────────────────────────────── */
+
+.quote-section {
+  background: var(--pine);
+  padding: 38px 32px;
+}
+
+.quote {
+  font-family: 'Playfair Display', serif;
+  font-size: 20px;
+  font-style: italic;
+  color: #ffffff;
+  line-height: 1.55;
+  margin-bottom: 16px;
+}
+
+.quote-attr {
+  font-size: 12px;
+  color: rgba(255, 255, 255, 0.45);
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  font-family: 'Source Serif 4', serif;
+}
+
+
+/* ── 10. Contact section ──────────────────────────────────── */
+
+.contact-section {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 36px;
+  align-items: start;
+}
+
+.contact-info p {
+  font-size: 14px;
+  color: var(--text-mid);
+  line-height: 1.8;
+  font-weight: 300;
+  margin-bottom: 6px;
+}
+
+.contact-info strong {
+  color: var(--pine);
+  font-family: 'Playfair Display', serif;
+  font-size: 15px;
+}
+
+.contact-title {
+  font-family: 'Playfair Display', serif;
+  font-size: 22px;
+  color: var(--pine);
+  margin-bottom: 16px;
+  line-height: 1.2;
+}
+
+.contact-details {
+  margin-top: 12px !important;
+}
+
+.demo-notice {
+  margin-top: 20px !important;
+  font-size: 12px !important;
+  color: var(--stone) !important;
+  font-style: italic;
+  line-height: 1.65 !important;
+}
+
+/* Form inputs and textarea */
+.contact-form input,
+.contact-form textarea {
+  display: block;
+  width: 100%;
+  border: 1px solid #d5cdc4;
+  padding: 10px 13px;
+  font-size: 13px;
+  font-family: 'Source Serif 4', serif;
+  margin-bottom: 10px;
+  background: #ffffff;
+  color: var(--text-dark);
+  outline: none;
+  resize: none;
+  transition: border-color 0.2s;
+}
+
+.contact-form input:focus,
+.contact-form textarea:focus {
+  border-color: var(--pine);
+}
+
+.submit-btn {
+  background: var(--pine);
+  color: #ffffff;
+  border: none;
+  padding: 12px 24px;
+  font-size: 13px;
+  cursor: pointer;
+  font-family: 'Playfair Display', serif;
+  font-weight: 600;
+  letter-spacing: 0.03em;
+  width: 100%;
+  transition: background 0.2s;
+}
+
+.submit-btn:hover {
+  background: var(--pine-light);
+}
+
+/* Success message shown after form is submitted */
+.form-success {
+  background: #e8f5e9;
+  border: 1px solid #a5d6a7;
+  padding: 22px;
+  font-size: 14px;
+  color: #2e7d32;
+  line-height: 1.6;
+}
+
+
+/* ── 11. Footer ───────────────────────────────────────────── */
+
+.footer {
+  background: var(--pine-dark);
+  padding: 20px 32px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.footer-logo {
+  font-family: 'Playfair Display', serif;
+  color: rgba(255, 255, 255, 0.6);
+  font-size: 15px;
+}
+
+.footer-note {
+  font-size: 12px;
+  color: rgba(255, 255, 255, 0.35);
+  letter-spacing: 0.04em;
+  font-family: 'Source Serif 4', serif;
+}
+
+
+/* ── 12. Responsive — smaller screens ─────────────────────── */
+
+@media (max-width: 640px) {
+
+  .exp-grid,
+  .contact-section {
+    grid-template-columns: 1fr;
+  }
+
+  .hero-title {
+    font-size: 28px;
+  }
+
+  .hero-text {
+    padding: 28px 20px 20px;
+  }
+
+  .section {
+    padding: 32px 20px;
+  }
+
+  .perf-bar {
+    padding: 10px 20px;
+    gap: 10px;
+  }
+
+  .navbar {
+    padding: 12px 20px;
+  }
+
+  .quote-section {
+    padding: 28px 20px;
+  }
+
+  .footer {
+    padding: 16px 20px;
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+}

@@ -1,0 +1,22 @@
+# Cloudflare Workers deployment configuration
+
+name = "skye-and-glen"
+main = "worker.js"
+compatibility_date = "2024-01-01"
+
+# KV Namespace for website files
+# Create with: wrangler kv:namespace create "ASSETS"
+# Then copy the id here
+[[kv_namespaces]]
+binding = "ASSETS"
+id = "PASTE_YOUR_KV_NAMESPACE_ID_HERE"
+
+# Built React files location
+[site]
+bucket = "../demo-site/build"
+
+# Environment variables
+[vars]
+ENVIRONMENT = "production"
+PROJECT = "MSc Rural Scotland Web Performance"
+STUDENT = "Michael Emeka Ibeh B01767356"
