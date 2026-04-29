@@ -39,7 +39,7 @@ Creates a `build/` folder with production-ready files.
 
 ## Result
 
-Your site will be live at: `https://[project-name].pages.dev`
+Site will be live at: `https://skyeandglen-uws.pages.dev/`
 
 ## Monitoring
 
@@ -73,8 +73,3 @@ This confirms Cloudflare served the file from its CDN cache.
 
 ---
 
-## Notes
-
-- The free Cloudflare Pages plan is more than enough for this project
-- Build time is usually under 30 seconds
-- Your site will have HTTPS automatically, no setup needed

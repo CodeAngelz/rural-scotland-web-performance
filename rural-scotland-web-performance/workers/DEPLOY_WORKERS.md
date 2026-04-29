@@ -69,7 +69,7 @@ cd workers
 wrangler deploy
 ```
 
-Your site is live at: `https://[worker-name].[subdomain].workers.dev`
+Your site is live at: `https://skyeandglen.skyeandglen-uws.workers.dev/`
 
 ## Verify Deployment
 
